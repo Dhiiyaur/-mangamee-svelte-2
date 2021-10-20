@@ -1,5 +1,4 @@
 import preprocess from 'svelte-preprocess';
-import ssr from '@sveltejs/adapter-static'
 import adapter from '@sveltejs/adapter-netlify';
 
 
