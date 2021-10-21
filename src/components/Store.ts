@@ -1,11 +1,12 @@
 import { writable } from 'svelte/store';
+import { browser } from "$app/env";
 
 // export const dataChapter = writable({});
 
 const itemName = 'dataChapter';
 // const retrieved = localStorage.getItem(itemName)
 const retrieved = () => {
-	if (typeof window !== 'undefined') {
+	if (browser) {
 		return localStorage.getItem(itemName);
 	} else {
 		return null;
@@ -15,4 +16,6 @@ const retrieved = () => {
 const parsed = JSON.parse(retrieved());
 export const dataChapter = writable(parsed === null ? [] : parsed);
 
-dataChapter.subscribe((value) => localStorage.setItem(itemName, JSON.stringify(value)));
+if (browser){
+  dataChapter.subscribe((value) => localStorage.setItem(itemName, JSON.stringify(value)));
+}
