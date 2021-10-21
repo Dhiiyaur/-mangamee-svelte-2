@@ -19,7 +19,6 @@
 
 	let pageNumber = parseInt(id);
 	let mangasData = [];
-	// let browseApi = 'http://localhost:61795/browse';
 
 	const handleNext = () => {
 		pageNumber += 1;

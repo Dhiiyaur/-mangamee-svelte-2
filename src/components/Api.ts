@@ -4,3 +4,4 @@ export let apiBrowse = `${api}/browse`
 export let apiManga = `${api}/manga`
 export let apiImage = `${api}/page`
 export let apiSearch = `${api}/search`
+export let apiEditorPick = `${api}/editorpick`

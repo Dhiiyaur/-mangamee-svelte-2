@@ -1,26 +1,37 @@
 <script lang="ts">
 	import MangaCard from '../components/Card.svelte';
-	import { apiSearch } from '../components/Api';
+	import { apiSearch, apiEditorPick } from '../components/Api';
+	import { onMount } from 'svelte';
 
 	let searchValue = '';
 	let mangasData = [];
+	let mangasEditorPickData = [];
 
-	const fetchSearchManga = async (searchValue) => {
-
-        mangasData = []
-
-		const res = await fetch(`${apiSearch}?mangaTitle=${searchValue}`);
-		mangasData = await res.json();
-		console.log(mangasData);
+	const fetchEditorManga = async () => {
+		mangasEditorPickData = [];
+		const res = await fetch(`${apiEditorPick}`);
+		mangasEditorPickData = await res.json();
+		// console.log(mangasEditorPickData);
 	};
 
-	const onKeyPress = (e) => {
-		if (e.charCode === 13) getMangaData();
+	const fetchSearchManga = async (searchValue:string) => {
+		mangasData = [];
+		const res = await fetch(`${apiSearch}?mangaTitle=${searchValue}`);
+		mangasData = await res.json();
+		// console.log(mangasData);
+	};
+
+	const onKeyPress = (e:KeyboardEvent) => {
+		if (e.key === "Enter") getMangaData();
 	};
 
 	const getMangaData = () => {
 		fetchSearchManga(searchValue);
 	};
+
+	onMount(() => {
+		fetchEditorManga();
+	});
 </script>
 
 <svelte:head>
@@ -44,9 +55,15 @@
 	</div>
 	{#if mangasData != undefined}
 		<div class="grid grid-cols-3 sm:grid-cols-7 gap-4 p-3 py-20">
-			{#each mangasData as mangaData}
-				<MangaCard dataManga={mangaData} />
-			{/each}
+			{#if searchValue !== ''}
+				{#each mangasData as mangaData}
+					<MangaCard dataManga={mangaData} />
+				{/each}
+			{:else}
+				{#each mangasEditorPickData as mangaData}
+					<MangaCard dataManga={mangaData} />
+				{/each}
+			{/if}
 		</div>
 	{/if}
 </div>

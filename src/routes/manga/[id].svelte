@@ -12,6 +12,7 @@
 <script lang="ts">
 	export let id: string;
 	import { apiManga } from '../../components/Api';
+	import { dataChapter } from '../../components/Store'
 
 	let mangasData = [];
 	let mangasChapter: [];
@@ -22,10 +23,11 @@
 		openChapterOrSummary = !openChapterOrSummary;
 	};
 
-	const fecthMangaData = async (id) => {
+	const fecthMangaData = async (id:string) => {
 		const res = await fetch(`${apiManga}?mangaTitle=${id}`);
 		mangasData = await res.json();
 		mangasChapter = await mangasData['Chapter'];
+		dataChapter.set(mangasChapter)
 	};
 
 	$: fecthMangaData(id);

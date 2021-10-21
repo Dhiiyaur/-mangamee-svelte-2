@@ -3,6 +3,10 @@
     const handleToggle = () => {
       isMobile = !isMobile
     }
+
+    // const handleMouseEvent = (e) => {
+    //   e.Mouse
+    // }
 </script>
 
 <div class="bg-gradient-to-br from-pink-500 to-red-300 fixed inset-x-0">
