@@ -57,6 +57,10 @@
     // })
 </script>
 
+<svelte:head>
+	<title>Mangamee</title>
+</svelte:head>
+
 <div>
 	<div class="bg-gray-100 min-h-screen justify-center items-center">
 		<div class="grid grid-cols-3 sm:grid-cols-7 gap-4 p-3 py-20">

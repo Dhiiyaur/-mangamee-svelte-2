@@ -12,7 +12,7 @@
 <script lang="ts">
 	export let id: string;
 	import { apiManga } from '../../components/Api';
-	import { dataChapter } from '../../components/Store'
+	import { dataChapter } from '../../components/Store';
 
 	let mangasData = [];
 	let mangasChapter: [];
@@ -23,18 +23,18 @@
 		openChapterOrSummary = !openChapterOrSummary;
 	};
 
-	const fecthMangaData = async (id:string) => {
+	const fecthMangaData = async (id: string) => {
 		const res = await fetch(`${apiManga}?mangaTitle=${id}`);
 		mangasData = await res.json();
 		mangasChapter = await mangasData['Chapter'];
-		dataChapter.set(mangasChapter)
+		dataChapter.set(mangasChapter);
 	};
 
 	$: fecthMangaData(id);
 </script>
 
 <svelte:head>
-    <title>Mangamee</title>
+	<title>Mangamee</title>
 </svelte:head>
 
 <div class="bg-gray-100 min-h-screen flex justify-center items-center">
@@ -58,6 +58,13 @@
 				</p>
 			</div>
 			<div class={`${openChapterOrSummary ? 'block' : 'hidden'} py-5 grid grid-cols-1 gap-3`}>
+				<div>
+					<input
+						type="text"
+						class="w-full p-3 shadow-lg text-sm"
+						placeholder="Find chapter"
+					/>
+				</div>
 				{#each mangasChapter as Chapter}
 					<div class="p-3 bg-white text-center shadow-lg text-sm">
 						<a href={`/read/${id}/${Chapter['ChapterLink']}`}> {Chapter['ChapterName']} </a>
