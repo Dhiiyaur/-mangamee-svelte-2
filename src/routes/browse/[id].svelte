@@ -10,7 +10,6 @@
 </script>
 
 <script lang="ts">
-	// import { onMount } from 'svelte';
     import {apiBrowse} from "../../components/Api"
 	import MangaCard from '../../components/Card.svelte';
 	import { goto } from '$app/navigation';

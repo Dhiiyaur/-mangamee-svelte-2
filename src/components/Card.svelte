@@ -1,6 +1,4 @@
 <script lang="ts">
-import { goto } from '$app/navigation';
-
     export let dataManga:any
     export let lastchapterMenu:boolean = false
     export let userHistoryExt:boolean = false
@@ -25,8 +23,6 @@ import { goto } from '$app/navigation';
                 console.log(res.status)
 
             }).catch(res => console.log("ereer", res))
-			// let res = await response.json();
-            // console.log("res", res)
 		} catch (error) {
 			console.log("err", error);
 		}
@@ -35,7 +31,6 @@ import { goto } from '$app/navigation';
     const handleDeleteUserManga = async(jwtUser, mangaID) => {
         await fetchDeleteUserHistory(jwtUser, mangaID)
         window.location.href='/history'
-        // goto('/history')
     }
 </script>
 

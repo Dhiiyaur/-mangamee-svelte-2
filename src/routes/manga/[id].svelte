@@ -37,14 +37,14 @@
 	$: fecthMangaData(id);
 </script>
 
-<svelte:head>
+<!-- <svelte:head>
     <title> {mangasData['MangaTitle']} </title>
     <meta property="og:image" content={mangasData['MangaCover']} />
     <meta
       property="twitter:image"
       content={mangasData['MangaCover']}
     />
-</svelte:head>
+</svelte:head> -->
 
 <div class="bg-gray-100 min-h-screen flex justify-center items-center">
 	{#if mangasChapter != undefined}

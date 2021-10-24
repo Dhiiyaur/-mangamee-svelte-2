@@ -33,23 +33,6 @@ if (browser) {
 }
 
 
-// const tempImageStore = () => {
-// 	if (browser) {
-// 		return localStorage.getItem('tempImage');
-// 	} else {
-// 		return null;
-// 	}
-// };
-// export const tempImage = writable(jwtStore());
-
-// if (browser) {
-// 	tempImage.subscribe((value) => {
-// 		localStorage.setItem('tempImage', value);
-// 	});
-// }
-
-
-
 const userDataHistory = 'tempUserHistory';
 const retrievedTempUserHistory = () => {
 	if (browser) {

@@ -23,24 +23,6 @@
 	let navigatorButton:boolean = true;
 	let sel:string;
 
-	// const fetchUserHistory = async (userData, jwt) => {
-	// 	try {
-	// 		const response = await fetch(apiUserCreateHistory, {
-	// 			method: 'POST',
-	// 			headers: {
-	// 				'Content-Type': 'application/json',
-	// 				Authorization: jwt
-	// 			},
-	// 			body: JSON.stringify(userData)
-	// 		});
-	// 		const data = await response.json();
-	// 		console.log(data)
-
-	// 	} catch (error) {
-	// 		console.log(error);
-	// 	}
-	// };
-
 	const handleSaveHistory = async(dataChapter, currentChapter, tempUserHistory, mangaLink, chapter, jwt) => {
 		let userHistory = {
 			MangaCover : tempUserHistory["cover"],
@@ -49,9 +31,6 @@
 			MangaLastRead : chapter,
 			MangaLastChapter : dataChapter[0]['ChapterLink'],
 		}
-
-		// console.log(userHistory)
-		// console.log(jwt)
 
 		try {
 			const response = await fetch(apiUserCreateHistory, {
@@ -63,7 +42,6 @@
 				body: JSON.stringify(userHistory)
 			});
 			const data = await response.json();
-			// console.log(data)
 
 		} catch (error) {
 			console.log(error);
