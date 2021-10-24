@@ -11,14 +11,12 @@
 		mangasEditorPickData = [];
 		const res = await fetch(`${apiEditorPick}`);
 		mangasEditorPickData = await res.json();
-		// console.log(mangasEditorPickData);
 	};
 
 	const fetchSearchManga = async (searchValue:string) => {
 		mangasData = [];
 		const res = await fetch(`${apiSearch}?mangaTitle=${searchValue}`);
 		mangasData = await res.json();
-		// console.log(mangasData);
 	};
 
 	const onKeyPress = (e:KeyboardEvent) => {
@@ -57,11 +55,11 @@
 		<div class="grid grid-cols-3 sm:grid-cols-7 gap-4 p-3 py-20">
 			{#if searchValue !== ''}
 				{#each mangasData as mangaData}
-					<MangaCard dataManga={mangaData} />
+					<MangaCard dataManga={mangaData} lastchapterMenu ={true} jwtUser = {null} />
 				{/each}
 			{:else}
 				{#each mangasEditorPickData as mangaData}
-					<MangaCard dataManga={mangaData} />
+					<MangaCard dataManga={mangaData} lastchapterMenu ={false} jwtUser = {null}/>
 				{/each}
 			{/if}
 		</div>

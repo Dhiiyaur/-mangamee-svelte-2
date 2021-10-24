@@ -36,36 +36,17 @@
     }
 
     $: fecthBrowseManga(pageNumber)
-
-    // interface MangasData {}
-	// let mangasData2: any[];
-
-	// onMount(async () => {
-	// 	const res = await fetch(`http://localhost:49566/browse?pageNumber=${id}`);
-	// 	mangasData = await res.json();
-	// 	console.log(mangasData);
-
-    //     console.log(id)
-	// 	await axios.get<MangasData[]>(browseApi, { params: { pageNumber: id } }).then((res) => {
-	// 		console.log(res.data);
-	// 		mangasData2 = res.data;
-	// 	});
-	// });
-
-    // onMount(() =>{
-    //     fecthBrowseManga()
-    // })
 </script>
 
 <svelte:head>
-	<title>Mangamee</title>
+	<title>Mangamee Browse</title>
 </svelte:head>
 
 <div>
 	<div class="bg-gray-100 min-h-screen justify-center items-center">
 		<div class="grid grid-cols-3 sm:grid-cols-7 gap-4 p-3 py-20">
 			{#each mangasData as mangaData}
-				<MangaCard dataManga={mangaData} />
+				<MangaCard dataManga={mangaData} lastchapterMenu = {true} jwtUser = {null}/>
 			{/each}
 		</div>
 	</div>

@@ -4,7 +4,7 @@
       isMobile = !isMobile
     }
 
-    
+
 
 </script>
 
@@ -25,7 +25,7 @@
       <div class={`${isMobile ? "block" : "hidden"} lg:flex justify-center flex-col lg:flex-row py-2 lg:py-2`}>
         <a href="/" class="block px-5 py-1 text-white hover:text-gray-200"> Home </a>
         <a href="/browse/1" class="block px-5 py-1 text-white hover:text-gray-200"> Browse </a>
-        <a href="/" class="block px-5 py-1 text-white hover:text-gray-200"> History </a>
+        <a href="/history" class="block px-5 py-1 text-white hover:text-gray-200"> History </a>
       </div>
     </div>
 </div>

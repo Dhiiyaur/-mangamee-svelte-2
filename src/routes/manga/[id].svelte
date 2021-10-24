@@ -12,7 +12,7 @@
 <script lang="ts">
 	export let id: string;
 	import { apiManga } from '../../components/Api';
-	import { dataChapter } from '../../components/Store';
+	import { dataChapter, tempDataUserHistory } from '../../components/Store';
 
 	let mangasData = [];
 	let mangasChapter: [];
@@ -28,13 +28,22 @@
 		mangasData = await res.json();
 		mangasChapter = await mangasData['Chapter'];
 		dataChapter.set(mangasChapter);
+		tempDataUserHistory.set({
+			cover : mangasData['MangaCover'],
+			title : mangasData['MangaTitle'],
+		})
 	};
 
 	$: fecthMangaData(id);
 </script>
 
 <svelte:head>
-	<title>Mangamee</title>
+    <title> {mangasData['MangaTitle']} </title>
+    <meta property="og:image" content={mangasData['MangaCover']} />
+    <meta
+      property="twitter:image"
+      content={mangasData['MangaCover']}
+    />
 </svelte:head>
 
 <div class="bg-gray-100 min-h-screen flex justify-center items-center">

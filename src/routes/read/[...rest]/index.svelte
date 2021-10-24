@@ -14,14 +14,62 @@
 <script lang="ts">
 	export let mangaTitle: string, chapter: string;
 	import { goto } from '$app/navigation';
-	import { apiImage } from '../../../components/Api';
-	import { dataChapter } from '../../../components/Store';
+	import { apiImage, apiUserCreateHistory } from '../../../components/Api';
+	import { dataChapter, tempDataUserHistory, jwt } from '../../../components/Store';
 
 	let ImageData = [];
 
 	let currentChapter:number;
 	let navigatorButton:boolean = true;
 	let sel:string;
+
+	// const fetchUserHistory = async (userData, jwt) => {
+	// 	try {
+	// 		const response = await fetch(apiUserCreateHistory, {
+	// 			method: 'POST',
+	// 			headers: {
+	// 				'Content-Type': 'application/json',
+	// 				Authorization: jwt
+	// 			},
+	// 			body: JSON.stringify(userData)
+	// 		});
+	// 		const data = await response.json();
+	// 		console.log(data)
+
+	// 	} catch (error) {
+	// 		console.log(error);
+	// 	}
+	// };
+
+	const handleSaveHistory = async(dataChapter, currentChapter, tempUserHistory, mangaLink, chapter, jwt) => {
+		let userHistory = {
+			MangaCover : tempUserHistory["cover"],
+			MangaLink : mangaLink,
+			MangaTitle : tempUserHistory["title"],
+			MangaLastRead : chapter,
+			MangaLastChapter : dataChapter[0]['ChapterLink'],
+		}
+
+		// console.log(userHistory)
+		// console.log(jwt)
+
+		try {
+			const response = await fetch(apiUserCreateHistory, {
+				method: 'POST',
+				headers: {
+					'Content-Type': 'application/json',
+					Authorization: jwt
+				},
+				body: JSON.stringify(userHistory)
+			});
+			const data = await response.json();
+			// console.log(data)
+
+		} catch (error) {
+			console.log(error);
+		}
+	}
+
 
 	const findChapter = (chapter:any, chapterLink: string) => {
 		let i = chapter.length;
@@ -67,13 +115,16 @@
 		ImageData = mangasData['Image'];
 		currentChapter = await findChapter($dataChapter, chapter);
 		sel = chapter;
+
+		// 
+		handleSaveHistory($dataChapter, currentChapter, $tempDataUserHistory, mangaTitle, chapter, $jwt)
 	};
 
 	$: fetchMangaImage(mangaTitle, chapter);
 </script>
 
 <svelte:head>
-	<title>Mangamee</title>
+	<title>Mangamee Read</title>
 </svelte:head>
 
 <div class="flex flex-col h-screen">
