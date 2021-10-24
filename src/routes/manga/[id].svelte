@@ -46,6 +46,11 @@
     />
 </svelte:head> -->
 
+
+<svelte:head>
+	<title>Mangamee Read</title>
+</svelte:head>
+
 <div class="bg-gray-100 min-h-screen flex justify-center items-center">
 	{#if mangasChapter != undefined}
 		<div class="py-20 w-4/5 sm:w-2/5">

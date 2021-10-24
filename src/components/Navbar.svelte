@@ -11,7 +11,7 @@
 <div class="bg-gradient-to-br from-pink-500 to-red-300 fixed inset-x-0">
     <div class="flex justify-between p-2 lg:hidden border-b">
       <div>
-        <p class="uppercase font-semibold text-white pt-1">Mangamee</p>
+        <a href="/"><p class="uppercase font-semibold text-white pt-1">Mangamee</p></a>
       </div>
       <div>
         <button on:click={handleToggle} class="focus:outline-none text-white">
