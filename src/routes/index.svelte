@@ -36,32 +36,35 @@
 	<title>Mangamee</title>
 </svelte:head>
 
-<div class="bg-gray-100 min-h-screen">
-	<div class="pt-52">
+<div class="bg-gray-800 min-h-screen">
+	<div class="sm:pt-52 pt-28">
 		<div class="flex justify-center">
 			<input
-				class="w-4/5 sm:w-3/5 rounded p-3 shadow-lg"
+				class="w-4/5 sm:w-3/5 p-3 shadow-lg"
 				type="text"
 				placeholder="Try 'naruto' "
 				bind:value={searchValue}
 				on:keypress={onKeyPress}
 			/>
-			<button class="bg-red-400 hover:bg-red-300 rounded text-white p-2" on:click={getMangaData}>
+			<button class="bg-red-400 hover:bg-red-300 text-white p-2" on:click={getMangaData}>
 				<p class="font-semibold text-xs">Search</p>
 			</button>
 		</div>
 	</div>
 	{#if mangasData != undefined}
-		<div class="grid grid-cols-3 sm:grid-cols-7 gap-4 p-3 py-20">
-			{#if searchValue !== ''}
-				{#each mangasData as mangaData}
-					<MangaCard dataManga={mangaData} lastchapterMenu ={true} jwtUser = {null} />
-				{/each}
-			{:else}
-				{#each mangasEditorPickData as mangaData}
-					<MangaCard dataManga={mangaData} lastchapterMenu ={false} jwtUser = {null}/>
-				{/each}
-			{/if}
+
+		<div class="flex justify-center">
+			<div class="grid grid-cols-3 sm:grid-cols-6 sm:gap-y-4 sm:gap-x-1 gap-2 py-20">
+				{#if searchValue !== ''}
+					{#each mangasData as mangaData}
+						<MangaCard dataManga={mangaData} lastchapterMenu ={true} jwtUser = {null} />
+					{/each}
+				{:else}
+					{#each mangasEditorPickData as mangaData}
+						<MangaCard dataManga={mangaData} lastchapterMenu ={false} jwtUser = {null}/>
+					{/each}
+				{/if}
+			</div>
 		</div>
 	{/if}
 </div>

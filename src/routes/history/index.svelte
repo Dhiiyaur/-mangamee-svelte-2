@@ -40,19 +40,21 @@
 	<title>Mangamee history</title>
 </svelte:head>
 
-<div class="bg-gray-100 min-h-screen">
+<div class="bg-gray-800 min-h-screen">
 	{#if userData !== undefined}
-		<div class="pt-28" />
+		<div class="sm:pt-28 pt-20" />
 		<div class="w-full justify-center flex">
 			<div class="flex justify-between w-4/5">
 				<div>
-					<div class="text-3xl font-semibold text-gray-600">Hi, {userData.username}</div>
+					<div class="text-3xl font-semibold text-white">Hi, {userData.username}</div>
 				</div>
-				<button class="text-red-500 font-bold" on:click={handleLogout}> Logout </button>
+				<button class="text-red-500 font-bold p-1 bg-white rounded-md" on:click={handleLogout}> Logout </button>
 			</div>
 		</div>
-		<div class="justify-center items-center">
-			<div class="grid grid-cols-3 sm:grid-cols-7 gap-4 p-3 py-20">
+		<!-- <div class="justify-center items-center">
+			<div class="grid grid-cols-3 sm:grid-cols-6 sm:gap-y-4 sm:gap-x-1 sm:py-20 sm:p-2"> -->
+		<div class="flex justify-center">
+			<div class="grid grid-cols-3 sm:grid-cols-6 sm:gap-y-4 sm:gap-x-1 gap-2 sm:pt-20 pt-10">
 				{#each userData.UserMangaData as mangaData}
 					<MangaCard dataManga={mangaData} userHistoryExt={true} jwtUser={$jwt} />
 				{/each}

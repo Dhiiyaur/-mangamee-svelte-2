@@ -51,12 +51,12 @@
 	<title>Mangamee Read</title>
 </svelte:head>
 
-<div class="bg-gray-100 min-h-screen flex justify-center items-center">
+<div class="bg-gray-800 min-h-screen flex justify-center items-center">
 	{#if mangasChapter != undefined}
 		<div class="py-20 w-4/5 sm:w-2/5">
 			<div class="flex justify-center"><img src={mangasData['MangaCover']} alt="" /></div>
 			<div class="flex justify-center py-5">
-				<p class="font-semibold">{mangasData['MangaTitle']}</p>
+				<p class="font-semibold text-white">{mangasData['MangaTitle']}</p>
 			</div>
 			<div class="flex gap-3">
 				<button class="bg-white p-2 rounded-sm shadow-lg text-sm" on:click={handleToggleMenu}
@@ -66,7 +66,7 @@
 					>Summary</button
 				>
 			</div>
-			<div class={`${openChapterOrSummary ? 'hidden' : 'block'} py-5`}>
+			<div class={`${openChapterOrSummary ? 'hidden' : 'block'} py-5 text-white`}>
 				<p class="text-center text-sm">
 					{mangasData['MangaSummary']}
 				</p>

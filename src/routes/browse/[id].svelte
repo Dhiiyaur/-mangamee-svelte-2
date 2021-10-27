@@ -10,7 +10,7 @@
 </script>
 
 <script lang="ts">
-    import {apiBrowse} from "../../components/Api"
+	import { apiBrowse } from '../../components/Api';
 	import MangaCard from '../../components/Card.svelte';
 	import { goto } from '$app/navigation';
 
@@ -20,21 +20,23 @@
 	let mangasData = [];
 
 	const handleNext = () => {
+		mangasData = [];
 		pageNumber += 1;
 		goto(`${pageNumber}`);
 	};
 
 	const handlePrev = () => {
+		mangasData = [];
 		pageNumber -= 1;
 		goto(`${pageNumber}`);
 	};
 
-    const fecthBrowseManga = async(number:number) => {
+	const fecthBrowseManga = async (number: number) => {
 		const res = await fetch(`${apiBrowse}?pageNumber=${number}`);
 		mangasData = await res.json();
-    }
+	};
 
-    $: fecthBrowseManga(pageNumber)
+	$: fecthBrowseManga(pageNumber);
 </script>
 
 <svelte:head>
@@ -42,14 +44,17 @@
 </svelte:head>
 
 <div>
-	<div class="bg-gray-100 min-h-screen justify-center items-center">
-		<div class="grid grid-cols-3 sm:grid-cols-7 gap-4 p-3 py-20">
-			{#each mangasData as mangaData}
-				<MangaCard dataManga={mangaData} lastchapterMenu = {true} jwtUser = {null}/>
-			{/each}
+	<div class="bg-gray-800 min-h-screen justify-center items-center">
+		<!-- <div class="grid grid-cols-3 sm:grid-cols-6 gap-y-4 gap-x-1 py-20"> -->
+		<div class="flex justify-center">
+			<div class="grid grid-cols-3 sm:grid-cols-6 sm:gap-y-4 sm:gap-x-1 gap-2 py-20">
+				{#each mangasData as mangaData}
+					<MangaCard dataManga={mangaData} lastchapterMenu={true} jwtUser={null} />
+				{/each}
+			</div>
 		</div>
 	</div>
-	<div class="bg-gray-300 p-2 fixed bottom-0 inset-x-0 opacity-75">
+	<div class="bg-gray-500 p-2 fixed bottom-0 inset-x-0 opacity-75">
 		<div class="text-center flex justify-center gap-10">
 			<button class="font-semibold" on:click={handlePrev}>Prev</button>
 			<button class="font-semibold" on:click={handleNext}>Next</button>

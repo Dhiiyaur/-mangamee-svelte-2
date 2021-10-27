@@ -1,32 +1,58 @@
 <script lang="ts">
-    let isMobile : boolean = false
-    const handleToggle = () => {
-      isMobile = !isMobile
-    }
-
-
-
+	let menu = false;
 </script>
 
-<div class="bg-gradient-to-br from-pink-500 to-red-300 fixed inset-x-0">
-    <div class="flex justify-between p-2 lg:hidden border-b">
-      <div>
-        <a href="/"><p class="uppercase font-semibold text-white pt-1">Mangamee</p></a>
-      </div>
-      <div>
-        <button on:click={handleToggle} class="focus:outline-none text-white">
-          <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16m-7 6h7" />
-          </svg>
-        </button>
-      </div>
-    </div>
-    <div>
-      <div class={`${isMobile ? "block" : "hidden"} lg:flex justify-center flex-col lg:flex-row py-2 lg:py-2`}>
-        <a href="/" class="block px-5 py-1 text-white hover:text-gray-200"> Home </a>
-        <a href="/browse/1" class="block px-5 py-1 text-white hover:text-gray-200"> Browse </a>
-        <a href="/history" class="block px-5 py-1 text-white hover:text-gray-200"> History </a>
-      </div>
-    </div>
+<div>
+	<div class="p-3 bg-gray-900">
+		<div class="justify-center space-x-7 hidden lg:flex">
+			<a href="/" class="text-white hover:text-blue-300 font-semibold"> Home </a>
+			<a href="/browse/1" class="text-white hover:text-blue-300 font-semibold"> Browse </a>
+			<a href="/history" class="text-white hover:text-blue-300 font-semibold"> History </a>
+		</div>
+		<div class="flex justify-end">
+			<button class="focus:outline-none text-white lg:hidden" on:click={() => (menu = !menu)}>
+				<svg
+					xmlns="http://www.w3.org/2000/svg"
+					class="h-6 w-6"
+					fill="none"
+					viewBox="0 0 24 24"
+					stroke="currentColor"
+				>
+					<path
+						stroke-linecap="round"
+						stroke-linejoin="round"
+						stroke-width="2"
+						d="M4 6h16M4 12h16m-7 6h7"
+					/>
+				</svg>
+			</button>
+		</div>
+	</div>
+
+	<div
+		class={`${
+			menu ? '' : '-translate-x-full'
+		} w-64 bg-gray-900 min-h-screen absolute inset-y-0 left-0`}
+	>
+		<nav class="flex flex-col pt-10">
+			<div class="font-bold text-white text-center text-3xl">MangaMee</div>
+			<div class="flex-col flex space-y-3 pt-10">
+				<div class="justify-center flex hover:bg-blue-300">
+					<a href="/" class="font-bold text-white text-center p-2 text-xl"
+						><i class="fas fa-home pr-4" /> Home
+					</a>
+				</div>
+				<div class="justify-center flex hover:bg-blue-300">
+					<a href="/browse/1" class="font-bold text-white text-center text-xl p-2"
+						><i class="fas fa-search pr-4" /> Browse
+					</a>
+				</div>
+				<div class="justify-center flex hover:bg-blue-300">
+					<a href="/history" class="font-bold text-white text-center  text-xl p-2"
+						><i class="fas fa-book-open pr-4" /> History
+					</a>
+				</div>
+			</div>
+		</nav>
+	</div>
 </div>
-  

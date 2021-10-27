@@ -1,16 +1,14 @@
 <script lang="ts">
-    export let dataManga:any
-    export let lastchapterMenu:boolean = false
-    export let userHistoryExt:boolean = false
-    export let jwtUser:string
-    import { apiUserDeleteHistory } from './Api'
-    
-    
-	const fetchDeleteUserHistory = async (jwtUser, mangaID) => {
+	export let dataManga: any;
+	export let lastchapterMenu: boolean = false;
+	export let userHistoryExt: boolean = false;
+	export let jwtUser: string;
+	import { apiUserDeleteHistory } from './Api';
 
-        let userHistory = {
-            "mangaID" : mangaID
-		}
+	const fetchDeleteUserHistory = async (jwtUser, mangaID) => {
+		let userHistory = {
+			mangaID: mangaID
+		};
 		try {
 			const response = await fetch(apiUserDeleteHistory, {
 				method: 'POST',
@@ -18,38 +16,85 @@
 					'Content-Type': 'application/json',
 					Authorization: jwtUser
 				},
-                body: JSON.stringify(userHistory)
-			}).then((res) => {
-                console.log(res.status)
-
-            }).catch(res => console.log("ereer", res))
+				body: JSON.stringify(userHistory)
+			})
+				.then((res) => {
+					console.log(res.status);
+				})
+				.catch((res) => console.log('ereer', res));
 		} catch (error) {
-			console.log("err", error);
+			console.log('err', error);
 		}
 	};
-    
-    const handleDeleteUserManga = async(jwtUser, mangaID) => {
-        await fetchDeleteUserHistory(jwtUser, mangaID)
-        window.location.href='/history'
-    }
+
+	const handleDeleteUserManga = async (jwtUser, mangaID) => {
+		await fetchDeleteUserHistory(jwtUser, mangaID);
+		window.location.href = '/history';
+	};
 </script>
 
+<div class="bg-gray-600 sm:w-56 w-28 rounded-md shadow-lg flex flex-col justify-between gap-x-2">
+	<div>
+		<a href={`/manga/${dataManga.MangaLink}`}>
+			<div>
+				<img src={dataManga.MangaCover} alt="" class="w-full h-44 sm:h-64 object-cover rounded-t-md" />
+			</div>
+			<div>
+				<div class="py-4 p-2 text-sm text-white">{dataManga.MangaTitle}</div>
+			</div>
+		</a>
+	</div>
+	<div>
+		{#if lastchapterMenu}
+			<div class="text-right text-white text-xs pr-3 pb-2">
+				Last Update - {dataManga.MangaLastChapter}
+			</div>
+		{/if}
+		{#if userHistoryExt}
+			<div class="text-right text-white text-xs truncate pr-2 pl-4">
+				Last Update - {dataManga.MangaLastChapter}
+			</div>
+			<div class="text-right text-white text-xs truncate pr-2 pl-4">
+				Last Read - {dataManga.MangaLastRead}
+			</div>
+		{/if}
+	</div>
+	<div>
+		{#if userHistoryExt}
+			<div class="justify-center flex pb-2 pt-2">
+				<button
+					class="p-1 text-red-500 text-sm shadow rounded bg-white"
+					on:click={(e) => {
+						handleDeleteUserManga(jwtUser, dataManga.MangaLink);
+					}}
+				>
+					Delete
+				</button>
+			</div>
+		{/if}
+	</div>
+</div>
 
-<div class="bg-white rounded-lg shadow-lg">
-    <a href={`/manga/${dataManga.MangaLink}`}>
-        <header>
-          <img class="rounded-t-lg lg:h-64 h-48 w-full object-cover" src={dataManga.MangaCover} alt="avatar" />
-        </header>
-        <div class="py-4 p-2 text-sm">{dataManga.MangaTitle}</div>
+<!-- <div class="bg-white rounded-lg shadow-lg">
+	<a href={`/manga/${dataManga.MangaLink}`}>
+		<div>
+			<img
+				class="rounded-t-lg lg:h-64 h-48 w-full object-cover"
+				src={dataManga.MangaCover}
+				alt="avatar"
+			/>
+		</div>
+		<div class="py-4 p-2 text-sm">{dataManga.MangaTitle}</div>
+	</a>
+	{#if lastchapterMenu}
+		<div class="text-right text-gray-500 text-xs pr-3 pb-2">
+			Last Update - {dataManga.MangaLastChapter}
+		</div>
+	{/if}
 
-    </a>
-        {#if lastchapterMenu}    
-            <footer class="text-right text-gray-500 text-xs pr-3 pb-2">Last Update - {dataManga.MangaLastChapter}</footer>
-        {/if}
-
-        {#if userHistoryExt}
-            <!-- <footer class="text-right text-gray-500 text-xs pr-3 pb-2">Last Update - {dataManga.MangaLastChapter}</footer> -->
-            <footer>
+	{#if userHistoryExt}
+		<footer class="text-right text-gray-500 text-xs pr-3 pb-2">Last Update - {dataManga.MangaLastChapter}</footer>
+		<footer>
                 <div>
                     <div class="text-right text-gray-500 text-xs pr-3 pb-2">
                         Last Update - {dataManga.MangaLastChapter}
@@ -64,6 +109,26 @@
                     </button>
                 </div>
             </footer>
-        {/if}
-    
-</div>
+
+        <div class="bg-red-500">
+            <div>
+                <div class="text-right text-gray-500 text-xs">
+                    Last Update - {dataManga.MangaLastChapter}
+                </div>
+                <div class="text-right text-gray-500 text-xs">
+                    Last Read - {dataManga.MangaLastRead}
+                </div>
+            </div>
+            <div>
+                <button
+                    class="p-1 text-red-500 shadow rounded bg-white"
+                    on:click={(e) => {
+                        handleDeleteUserManga(jwtUser, dataManga.MangaLink);
+                    }}
+                >
+                    Delete
+                </button>
+            </div>
+        </div>
+	{/if}
+</div> -->
