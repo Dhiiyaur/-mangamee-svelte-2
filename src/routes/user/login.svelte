@@ -18,7 +18,15 @@
 				body: JSON.stringify(userData)
 			});
 			const data = await response.json();
-			jwt.set(data.token);
+			// jwt.set(data.token);
+			const timestamp = new Date().getTime(); // current time
+			const exp = timestamp + (60 * 60 * 23 * 1000)
+
+			jwt.set({
+				"jwt" : data.token,
+				"expired" : exp
+			});
+
 			goto('/history');
 		} catch (error) {
 			console.log(error);
@@ -30,7 +38,7 @@
 	};
 </script>
 
-<div class="min-h-screen bg-gray-300 flex justify-center items-center">
+<div class="min-h-screen bg-gray-800 flex justify-center items-center">
 	<div class="pt-52" />
 	<div class="bg-white w-4/5 lg:w-3/12 rounded-3xl shadow-lg">
 		<div class="p-7 lg:p-10">

@@ -54,7 +54,7 @@
 	{#if mangasData != undefined}
 
 		<div class="flex justify-center">
-			<div class="grid grid-cols-3 sm:grid-cols-6 sm:gap-y-4 sm:gap-x-1 gap-2 py-20">
+			<div class="grid grid-cols-3 sm:grid-cols-6 sm:gap-y-4 sm:gap-x-1 gap-4 py-20">
 				{#if searchValue !== ''}
 					{#each mangasData as mangaData}
 						<MangaCard dataManga={mangaData} lastchapterMenu ={true} jwtUser = {null} />

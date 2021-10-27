@@ -43,7 +43,7 @@
 	};
 </script>
 
-<div class="min-h-screen bg-gray-300 flex justify-center items-center">
+<div class="min-h-screen bg-gray-800 flex justify-center items-center">
 	<div class="pt-52" />
 	<div class="bg-white w-4/5 lg:w-3/12 rounded-3xl shadow-lg">
 		<div class="p-7 lg:p-10">

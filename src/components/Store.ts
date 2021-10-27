@@ -24,11 +24,12 @@ const jwtStore = () => {
 		return null;
 	}
 };
-export const jwt = writable(jwtStore());
+const parsedJwt = JSON.parse(jwtStore());
+export const jwt = writable(parsedJwt === null ? null : parsedJwt);
 
 if (browser) {
 	jwt.subscribe((value) => {
-		localStorage.setItem('jwt', value);
+		localStorage.setItem('jwt', JSON.stringify(value));
 	});
 }
 

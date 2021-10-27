@@ -13,7 +13,7 @@
 				method: 'GET',
 				headers: {
 					'Content-Type': 'application/json',
-					Authorization: jwt
+					Authorization: jwt["jwt"]
 				}
 			});
 			userData = await response.json();
@@ -31,7 +31,13 @@
 		if ($jwt == 'null' || $jwt == undefined) {
 			goto('/user/login');
 		} else {
-			fetchUserHistory($jwt);
+			const timestamp = new Date().getTime();
+			if (timestamp > $jwt["expired"]) {
+				localStorage.removeItem('jwt');
+				window.location.href = '/user/login'
+			} else {
+				fetchUserHistory($jwt);
+			}
 		}
 	});
 </script>
@@ -54,7 +60,7 @@
 		<!-- <div class="justify-center items-center">
 			<div class="grid grid-cols-3 sm:grid-cols-6 sm:gap-y-4 sm:gap-x-1 sm:py-20 sm:p-2"> -->
 		<div class="flex justify-center">
-			<div class="grid grid-cols-3 sm:grid-cols-6 sm:gap-y-4 sm:gap-x-1 gap-2 sm:pt-20 pt-10">
+			<div class="grid grid-cols-3 sm:grid-cols-6 sm:gap-y-4 sm:gap-x-1 gap-4 sm:pt-20 pt-10">
 				{#each userData.UserMangaData as mangaData}
 					<MangaCard dataManga={mangaData} userHistoryExt={true} jwtUser={$jwt} />
 				{/each}
