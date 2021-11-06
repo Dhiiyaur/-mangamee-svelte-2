@@ -17,16 +17,16 @@
 	export let id: string;
 
 	let pageNumber = parseInt(id);
-	let mangasData = [];
+	let mangasData;
 
 	const handleNext = () => {
-		mangasData = [];
+		mangasData = undefined;
 		pageNumber += 1;
 		goto(`${pageNumber}`);
 	};
 
 	const handlePrev = () => {
-		mangasData = [];
+		mangasData = undefined;
 		pageNumber -= 1;
 		goto(`${pageNumber}`);
 	};
@@ -34,8 +34,6 @@
 	const fecthBrowseManga = async (number: number) => {
 		const res = await fetch(`${apiBrowse}?pageNumber=${number}`);
 		mangasData = await res.json();
-		// console.log(res)
-		// console.log(mangasData)
 	};
 
 	$: fecthBrowseManga(pageNumber);
@@ -47,12 +45,14 @@
 
 <div>
 	<div class="bg-gray-800 min-h-screen justify-center items-center">
-		<!-- <div class="grid grid-cols-3 sm:grid-cols-6 gap-y-4 gap-x-1 py-20"> -->
 		<div class="flex justify-center">
 			<div class="grid grid-cols-3 sm:grid-cols-6 sm:gap-y-4 sm:gap-x-1 gap-4 py-20">
-				{#each mangasData as mangaData}
+				<!-- {#each mangasData as mangaData}
 					<MangaCard dataManga={mangaData} lastchapterMenu={true} jwtUser={null} />
-				{/each}
+				{/each} -->
+				{#if mangasData !== undefined && mangasData.length != 0}
+					<MangaCard data={mangasData} />
+				{/if}
 			</div>
 		</div>
 	</div>

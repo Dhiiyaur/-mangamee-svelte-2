@@ -4,23 +4,38 @@
 	import { onMount } from 'svelte';
 
 	let searchValue = '';
-	let mangasData = [];
-	let mangasEditorPickData = [];
+	let mangasData;
+	let mangasEditorPickData;
+
+	let mangaSource = [
+		{ name: 'ID', value: 'id' },
+		{ name: 'ENG', value: 'en' }
+	];
+	let currentSource = 'en';
 
 	const fetchEditorManga = async () => {
-		mangasEditorPickData = [];
+		mangasEditorPickData = undefined;
 		const res = await fetch(`${apiEditorPick}`);
 		mangasEditorPickData = await res.json();
+		// console.log(mangasEditorPickData);
 	};
 
-	const fetchSearchManga = async (searchValue:string) => {
-		mangasData = [];
-		const res = await fetch(`${apiSearch}?mangaTitle=${searchValue}`);
+	const fetchSearchManga = async (searchValue: string) => {
+		mangasData = undefined;
+		const res = await fetch(
+			`${apiSearch}?` +
+				new URLSearchParams({
+					src: currentSource,
+					mangaTitle: searchValue
+				})
+		);
+
 		mangasData = await res.json();
+		// console.log(mangasData);
 	};
 
-	const onKeyPress = (e:KeyboardEvent) => {
-		if (e.key === "Enter") getMangaData();
+	const onKeyPress = (e: KeyboardEvent) => {
+		if (e.key === 'Enter') getMangaData();
 	};
 
 	const getMangaData = () => {
@@ -37,7 +52,7 @@
 </svelte:head>
 
 <div class="bg-gray-800 min-h-screen">
-	<div class="sm:pt-52 pt-28">
+	<div class="sm:pt-36 pt-28">
 		<div class="flex justify-center">
 			<input
 				class="w-4/5 sm:w-3/5 p-3 shadow-lg"
@@ -50,21 +65,53 @@
 				<p class="font-semibold text-xs">Search</p>
 			</button>
 		</div>
+		<div class="flex flex-wrap justify-center pt-2 space-x-3">
+			{#each mangaSource as source}
+				<div
+					class={`${
+						currentSource == source.value ? 'bg-red-400' : ''
+					} p-2 px-3 bg-white text-xs hover:bg-red-200 cursor-pointer`}
+					on:click={() => (currentSource = source.value)}
+				>
+					{source.name}
+				</div>
+			{/each}
+		</div>
 	</div>
-	{#if mangasData != undefined}
+	<div class="flex justify-center">
+		<div class="grid grid-cols-3 sm:grid-cols-6 sm:gap-y-4 sm:gap-x-1 gap-4 py-28">
 
-		<div class="flex justify-center">
-			<div class="grid grid-cols-3 sm:grid-cols-6 sm:gap-y-4 sm:gap-x-1 gap-4 py-20">
-				{#if searchValue !== ''}
+			<!-- {#if searchValue !== ''}
 					{#each mangasData as mangaData}
-						<MangaCard dataManga={mangaData} lastchapterMenu ={true} jwtUser = {null} />
+						<MangaCard data={mangaData} lastchapterMenu={true} jwtUser={null} />
 					{/each}
 				{:else}
-					{#each mangasEditorPickData as mangaData}
-						<MangaCard dataManga={mangaData} lastchapterMenu ={false} jwtUser = {null}/>
+					{#each mangasEditorPickData["MangaData"] as mangaData}
+						<MangaCard data={mangaData} lastchapterMenu={false} jwtUser={null} />
 					{/each}
+				{/if} -->
+
+			<!-- {#if searchValue !== ''}
+					{#if mangasData !== undefined && mangasData.length !== 0}
+						<MangaCard data={mangasData} />
+					{:else}
+						<div>Loading</div>
+					{/if}
+				{:else if mangasEditorPickData !== undefined && mangasEditorPickData.length !== 0}
+					<MangaCard data={mangasEditorPickData} />
+				{:else}
+					<div>Loading</div>
+				{/if} -->
+
+			{#if searchValue !== ''}
+				{#if mangasData !== undefined && mangasData.length != 0}
+					<MangaCard data={mangasData} />
 				{/if}
-			</div>
+			{:else}
+				{#if mangasEditorPickData !== undefined && mangasEditorPickData.length != 0}
+					<MangaCard data={mangasEditorPickData} />
+				{/if}
+			{/if}
 		</div>
-	{/if}
+	</div>
 </div>

@@ -61,9 +61,9 @@
 			<div class="grid grid-cols-3 sm:grid-cols-6 sm:gap-y-4 sm:gap-x-1 sm:py-20 sm:p-2"> -->
 		<div class="flex justify-center">
 			<div class="grid grid-cols-3 sm:grid-cols-6 sm:gap-y-4 sm:gap-x-1 gap-4 sm:pt-20 pt-10">
-				{#each userData.UserMangaData as mangaData}
-					<MangaCard dataManga={mangaData} userHistoryExt={true} jwtUser={$jwt} />
-				{/each}
+				<!-- {#each userData.UserMangaData as mangaData}
+					<MangaCard data={mangaData} userHistoryExt={true} jwtUser={$jwt} />
+				{/each} -->
 			</div>
 		</div>
 	{/if}

@@ -38,29 +38,39 @@
 			<div class="font-bold text-white text-center text-3xl">MangaMee</div>
 			<div class="flex-col flex space-y-3 pt-10">
 				<div class="justify-center flex hover:bg-blue-300">
-					<a href="/" class="font-bold text-white text-center p-2 text-xl" on:click={() => {
-						if (menu) {
-							menu = false
-						}
-					}}
+					<a
+						href="/"
+						class="font-bold text-white text-center p-2 text-xl"
+						on:click={() => {
+							if (menu) {
+								menu = false;
+							}
+						}}
 						><i class="fas fa-home pr-4" /> Home
 					</a>
 				</div>
 				<div class="justify-center flex hover:bg-blue-300">
-					<a href="/browse/1" class="font-bold text-white text-center text-xl p-2" on:click={() => {
-						if (menu) {
-							menu = false
-						}
-					}}
+					<a
+						href="/browse/1"
+						class="font-bold text-white text-center text-xl p-2"
+						on:click={() => {
+							if (menu) {
+								menu = false;
+							}
+						}}
 						><i class="fas fa-search pr-4" /> Browse
 					</a>
 				</div>
 				<div class="justify-center flex hover:bg-blue-300">
-					<a href="/history" class="font-bold text-white text-center  text-xl p-2" on:click={() => {
-						if (menu) {
-							menu = false
-						}
-					}}
+					<!-- <a href="/history" class="font-bold text-white text-center  text-xl p-2" on:click={() => { -->
+					<a
+						href="/"
+						class="font-bold text-white text-center  text-xl p-2"
+						on:click={() => {
+							if (menu) {
+								menu = false;
+							}
+						}}
 						><i class="fas fa-book-open pr-4" /> History
 					</a>
 				</div>
