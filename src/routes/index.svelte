@@ -17,7 +17,6 @@
 		mangasEditorPickData = undefined;
 		const res = await fetch(`${apiEditorPick}`);
 		mangasEditorPickData = await res.json();
-		// console.log(mangasEditorPickData);
 	};
 
 	const fetchSearchManga = async (searchValue: string) => {
@@ -31,7 +30,6 @@
 		);
 
 		mangasData = await res.json();
-		// console.log(mangasData);
 	};
 
 	const onKeyPress = (e: KeyboardEvent) => {
@@ -80,36 +78,13 @@
 	</div>
 	<div class="flex justify-center">
 		<div class="grid grid-cols-3 sm:grid-cols-6 sm:gap-y-4 sm:gap-x-1 gap-4 py-28">
-
-			<!-- {#if searchValue !== ''}
-					{#each mangasData as mangaData}
-						<MangaCard data={mangaData} lastchapterMenu={true} jwtUser={null} />
-					{/each}
-				{:else}
-					{#each mangasEditorPickData["MangaData"] as mangaData}
-						<MangaCard data={mangaData} lastchapterMenu={false} jwtUser={null} />
-					{/each}
-				{/if} -->
-
-			<!-- {#if searchValue !== ''}
-					{#if mangasData !== undefined && mangasData.length !== 0}
-						<MangaCard data={mangasData} />
-					{:else}
-						<div>Loading</div>
-					{/if}
-				{:else if mangasEditorPickData !== undefined && mangasEditorPickData.length !== 0}
-					<MangaCard data={mangasEditorPickData} />
-				{:else}
-					<div>Loading</div>
-				{/if} -->
-
 			{#if searchValue !== ''}
 				{#if mangasData !== undefined && mangasData.length != 0}
-					<MangaCard cardData={mangasData} />
+					<MangaCard cardData={mangasData} browseMode={false}/>
 				{/if}
 			{:else}
 				{#if mangasEditorPickData !== undefined && mangasEditorPickData.length != 0}
-					<MangaCard cardData={mangasEditorPickData} />
+					<MangaCard cardData={mangasEditorPickData} browseMode={true}/>
 				{/if}
 			{/if}
 		</div>

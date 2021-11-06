@@ -10,11 +10,10 @@
 </script>
 
 <script lang="ts">
+	export let id: string;
 	import { apiBrowse } from '../../components/Api';
 	import MangaCard from '../../components/Card.svelte';
 	import { goto } from '$app/navigation';
-
-	export let id: string;
 
 	let pageNumber = parseInt(id);
 	let mangasData;
@@ -51,7 +50,7 @@
 					<MangaCard dataManga={mangaData} lastchapterMenu={true} jwtUser={null} />
 				{/each} -->
 				{#if mangasData !== undefined && mangasData.length != 0}
-					<MangaCard data={mangasData} />
+					<MangaCard cardData={mangasData} browseMode={true}/>
 				{/if}
 			</div>
 		</div>
