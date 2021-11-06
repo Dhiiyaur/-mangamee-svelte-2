@@ -105,11 +105,11 @@
 
 			{#if searchValue !== ''}
 				{#if mangasData !== undefined && mangasData.length != 0}
-					<MangaCard data={mangasData} />
+					<MangaCard cardData={mangasData} />
 				{/if}
 			{:else}
 				{#if mangasEditorPickData !== undefined && mangasEditorPickData.length != 0}
-					<MangaCard data={mangasEditorPickData} />
+					<MangaCard cardData={mangasEditorPickData} />
 				{/if}
 			{/if}
 		</div>

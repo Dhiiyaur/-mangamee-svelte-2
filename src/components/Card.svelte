@@ -1,9 +1,7 @@
 <script lang="ts">
-	export let data: any
-	let mangaData = data.MangaData;
-	let mangaSource = data.MangaSource;
-
-	console.log(mangaSource, mangaData)
+	export let cardData: any
+	let mangaData = cardData["MangaData"];
+	let mangaSource = cardData["MangaSource"];
 </script>
 
 {#each mangaData as manga}
