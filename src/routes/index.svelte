@@ -9,8 +9,10 @@
 
 	let mangaSource = [
 		{ name: 'ID', value: 'id' },
-		{ name: 'ENG', value: 'en' }
+		{ name: 'ENG', value: 'en' },
+		{ name: 'ENG2', value: 'en2' }
 	];
+	
 	let currentSource = 'en';
 
 	const fetchEditorManga = async () => {
