@@ -18,8 +18,6 @@
 				body: JSON.stringify(userData)
 			});
 			const data = await response.json();
-			console.log(data)
-			// jwt.set(data.token);
 			const timestamp = new Date().getTime(); // current time
 			const exp = timestamp + (60 * 60 * 23 * 1000)
 

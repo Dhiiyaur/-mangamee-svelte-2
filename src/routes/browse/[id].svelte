@@ -50,7 +50,10 @@
 					<MangaCard dataManga={mangaData} lastchapterMenu={true} jwtUser={null} />
 				{/each} -->
 				{#if mangasData !== undefined && mangasData.length != 0}
-					<MangaCard cardData={mangasData} browseMode={true}/>
+					<MangaCard
+						cardData={mangasData}
+						historyMode={false}
+					/>
 				{/if}
 			</div>
 		</div>

@@ -6,8 +6,8 @@
 	import MangaCard from '../../components/Card.svelte';
 
 	let userData;
+	
 	const fetchUserHistory = async (jwt) => {
-		console.log(jwt['jwt']);
 		try {
 			const response = await fetch(apiUserGetHistory, {
 				method: 'GET',
@@ -17,7 +17,6 @@
 				}
 			});
 			userData = await response.json();
-			console.log(userData);
 		} catch (error) {
 			console.log(error);
 		}
@@ -66,7 +65,7 @@
 
 			<div class="flex justify-center">
 				<div class="grid grid-cols-3 sm:grid-cols-6 sm:gap-y-4 sm:gap-x-1 gap-4 py-20">
-					<MangaCard cardData={userData} browseMode={false} historyMode={true} />
+					<MangaCard cardData={userData} historyMode={true}/>
 				</div>
 			</div>
 		{/if}
