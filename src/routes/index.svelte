@@ -82,11 +82,11 @@
 		<div class="grid grid-cols-3 sm:grid-cols-6 sm:gap-y-4 sm:gap-x-1 gap-4 py-28">
 			{#if searchValue !== ''}
 				{#if mangasData !== undefined && mangasData.length != 0}
-					<MangaCard cardData={mangasData} browseMode={false}/>
+					<MangaCard cardData={mangasData} browseMode={false} historyMode={false}/>
 				{/if}
 			{:else}
 				{#if mangasEditorPickData !== undefined && mangasEditorPickData.length != 0}
-					<MangaCard cardData={mangasEditorPickData} browseMode={true}/>
+					<MangaCard cardData={mangasEditorPickData} browseMode={true} historyMode={false}/>
 				{/if}
 			{/if}
 		</div>

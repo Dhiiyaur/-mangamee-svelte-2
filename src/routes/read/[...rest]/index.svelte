@@ -16,6 +16,13 @@
 	export let srcApi: string, mangaTitle: string, chapter: string;
 	import { apiImage, apiUserCreateHistory, apiChapterCheck } from '../../../components/Api';
 	import { goto } from '$app/navigation';
+	import { jwt } from '../../../components/Store';
+
+	let imageData = [];
+	let mangaChapter;
+	let currentChapter: number;
+	let mangaCover, mangaTitle2: string
+
 
 	const handleImageError = (e: any) => {
 		e.target.onerror = null;
@@ -23,9 +30,32 @@
 		e.target.src = ' ';
 	};
 
-	let imageData = [];
-	let mangaChapter;
-	let currentChapter: number;
+	const handleSaveHistory = async() => {
+
+		let userHistory = {
+ 			MangaSource: srcApi,
+ 			MangaCover: mangaCover,
+ 			MangaLink: mangaTitle,
+ 			MangaTitle: mangaTitle2,
+ 			MangaLastRead: chapter,
+ 			MangaLastChapter: mangaChapter[0]['ChapterName']
+ 		};
+
+		try {
+			const response = await fetch(apiUserCreateHistory, {
+				method: 'POST',
+				headers: {
+					'Content-Type': 'application/json',
+					Authorization: $jwt['jwt']
+				},
+				body: JSON.stringify(userHistory)
+			});
+			const data = await response.json();
+		} catch (error) {
+			console.log(error);
+		}
+	}
+
 
 	const handlePrevChapter = () => {
 		console.log('prev');
@@ -88,6 +118,11 @@
 		let json = await res.json();
 		let mangasData = json['MangaData'];
 		mangaChapter = mangasData['Chapter'];
+		mangaCover = mangasData['MangaCover']
+		mangaTitle2 = mangasData['MangaTitle']
+
+		handleSaveHistory()
+
 		currentChapter = findChapter(mangaChapter, chapter);
 	};
 
