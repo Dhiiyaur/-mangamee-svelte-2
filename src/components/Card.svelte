@@ -1,34 +1,56 @@
 <script lang="ts">
-	export let cardData: any, browseMode: boolean
+	export let cardData: any, browseMode: boolean, historyMode: boolean;
 	let mangaData = cardData['MangaData'];
 	let mangaSource = cardData['MangaSource'];
+
+	if (historyMode) {
+		mangaData = cardData['UserMangaData'];
+	}
 </script>
 
 {#each mangaData as manga}
 	<div class="bg-gray-600 sm:w-56 w-28 rounded-md shadow-lg flex flex-col justify-between gap-x-2">
-		<div>
-			<a href={`/manga/${mangaSource}/${manga['MangaLink']}`}>
-				<div>
-					<img
-						src={manga['MangaCover']}
-						alt=""
-						class="w-full h-44 sm:h-64 object-cover rounded-t-md"
-					/>
-				</div>
-				<div>
-					<div class="py-4 p-2 text-sm text-white">{manga['MangaTitle']}</div>
-				</div>
-			</a>
-		</div>
-
+		{#if historyMode}
+			<div>
+				<a href={`/manga/${manga['MangaSource']}/${manga['MangaLink']}`}>
+					<div>
+						<img
+							src={manga['MangaCover']}
+							alt=""
+							class="w-full h-44 sm:h-64 object-cover rounded-t-md"
+						/>
+					</div>
+					<div>
+						<div class="py-4 p-2 text-sm text-white">{manga['MangaTitle']}</div>
+					</div>
+				</a>
+			</div>
+			<div class="text-right text-white text-xs pr-3 pb-2">
+				Last Read - {manga['MangaLastRead']}
+			</div>
+		{:else}
+			<div>
+				<a href={`/manga/${mangaSource}/${manga['MangaLink']}`}>
+					<div>
+						<img
+							src={manga['MangaCover']}
+							alt=""
+							class="w-full h-44 sm:h-64 object-cover rounded-t-md"
+						/>
+					</div>
+					<div>
+						<div class="py-4 p-2 text-sm text-white">{manga['MangaTitle']}</div>
+					</div>
+				</a>
+			</div>
+		{/if}
 		{#if !browseMode}
 			<div class="text-right text-white text-xs pr-3 pb-2">
-				Last Update - {manga["MangaLastChapter"]}
+				Last Update - {manga['MangaLastChapter']}
 			</div>
 		{/if}
 	</div>
 {/each}
-
 
 <!-- <script lang="ts">
 	export let data: any;

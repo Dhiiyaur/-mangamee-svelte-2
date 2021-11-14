@@ -64,7 +64,7 @@
 				<div class="justify-center flex hover:bg-blue-300">
 					<!-- <a href="/history" class="font-bold text-white text-center  text-xl p-2" on:click={() => { -->
 					<a
-						href="/"
+						href="/history"
 						class="font-bold text-white text-center  text-xl p-2"
 						on:click={() => {
 							if (menu) {

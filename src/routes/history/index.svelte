@@ -7,15 +7,17 @@
 
 	let userData;
 	const fetchUserHistory = async (jwt) => {
+		console.log(jwt['jwt']);
 		try {
 			const response = await fetch(apiUserGetHistory, {
 				method: 'GET',
 				headers: {
 					'Content-Type': 'application/json',
-					Authorization: jwt["jwt"]
+					Authorization: jwt['jwt']
 				}
 			});
 			userData = await response.json();
+			console.log(userData);
 		} catch (error) {
 			console.log(error);
 		}
@@ -31,9 +33,9 @@
 			goto('/user/login');
 		} else {
 			const timestamp = new Date().getTime();
-			if (timestamp > $jwt["expired"]) {
+			if (timestamp > $jwt['expired']) {
 				localStorage.removeItem('jwt');
-				window.location.href = '/user/login'
+				window.location.href = '/user/login';
 			} else {
 				fetchUserHistory($jwt);
 			}
@@ -45,25 +47,29 @@
 	<title>Mangamee history</title>
 </svelte:head>
 
-<div class="bg-gray-800 min-h-screen">
-	{#if userData !== undefined}
-		<div class="sm:pt-28 pt-20" />
-		<div class="w-full justify-center flex">
-			<div class="flex justify-between w-4/5">
-				<div>
-					<div class="text-3xl font-semibold text-white">Hi, {userData.username}</div>
+<div>
+	<div class="bg-gray-800 min-h-screen justify-center items-center">
+		{#if userData !== undefined && userData.length != 0}
+			<div class="w-full justify-center flex">
+				<div class="flex justify-between w-4/5 pt-5">
+					<div>
+						<div class="text-3xl font-semibold text-white">Hi, {userData.username}</div>
+					</div>
+					<button
+						class="text-white font-bold p-1 bg-red-500 rounded-md text-xs"
+						on:click={handleLogout}
+					>
+						Logout
+					</button>
 				</div>
-				<button class="text-red-500 font-bold p-1 bg-white rounded-md" on:click={handleLogout}> Logout </button>
 			</div>
-		</div>
-		<!-- <div class="justify-center items-center">
-			<div class="grid grid-cols-3 sm:grid-cols-6 sm:gap-y-4 sm:gap-x-1 sm:py-20 sm:p-2"> -->
-		<div class="flex justify-center">
-			<div class="grid grid-cols-3 sm:grid-cols-6 sm:gap-y-4 sm:gap-x-1 gap-4 sm:pt-20 pt-10">
-				<!-- {#each userData.UserMangaData as mangaData}
-					<MangaCard data={mangaData} userHistoryExt={true} jwtUser={$jwt} />
-				{/each} -->
+
+			<div class="flex justify-center">
+				<div class="grid grid-cols-3 sm:grid-cols-6 sm:gap-y-4 sm:gap-x-1 gap-4 py-20">
+					<MangaCard cardData={userData} browseMode={false} historyMode={true} />
+				</div>
 			</div>
-		</div>
-	{/if}
+		{/if}
+	</div>
 </div>
+

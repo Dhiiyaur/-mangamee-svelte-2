@@ -18,6 +18,7 @@
 				body: JSON.stringify(userData)
 			});
 			const data = await response.json();
+			console.log(data)
 			// jwt.set(data.token);
 			const timestamp = new Date().getTime(); // current time
 			const exp = timestamp + (60 * 60 * 23 * 1000)
@@ -42,7 +43,7 @@
 	<div class="pt-52" />
 	<div class="bg-white w-4/5 lg:w-3/12 rounded-3xl shadow-lg">
 		<div class="p-7 lg:p-10">
-			<div class="flex justify-center font-semibold text-gray-600">SIGN UP</div>
+			<div class="flex justify-center font-semibold text-gray-600">SIGN IN</div>
 			<br />
 			<div>
 				<form class="space-y-3" on:submit|preventDefault={handleSumbit}>
