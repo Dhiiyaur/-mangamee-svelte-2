@@ -6,7 +6,6 @@
 	import MangaCard from '../../components/Card.svelte';
 
 	let userData;
-
 	const fetchUserHistory = async (jwt) => {
 		try {
 			const response = await fetch(apiUserGetHistory, {

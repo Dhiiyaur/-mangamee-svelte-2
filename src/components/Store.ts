@@ -24,6 +24,7 @@ const jwtStore = () => {
 		return null;
 	}
 };
+
 const parsedJwt = JSON.parse(jwtStore());
 export const jwt = writable(parsedJwt === null ? null : parsedJwt);
 
