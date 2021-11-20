@@ -67,14 +67,9 @@
 		</div>
 		<div class="flex flex-wrap justify-center pt-2 space-x-3">
 			{#each mangaSource as source}
-				<div
-					class={`${
-						currentSource == source.value ? 'bg-red-400' : ''
-					} p-2 px-3 bg-white text-xs hover:bg-red-200 cursor-pointer`}
-					on:click={() => (currentSource = source.value)}
-				>
+				<button class={`${currentSource == source.value ? 'bg-red-400' : 'bg-white'} p-2 px-3 text-xs hover:bg-red-200`} on:click={() => (currentSource = source.value)}>
 					{source.name}
-				</div>
+				</button>
 			{/each}
 		</div>
 	</div>
