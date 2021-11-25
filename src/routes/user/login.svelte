@@ -18,12 +18,11 @@
 				body: JSON.stringify(userData)
 			});
 			const data = await response.json();
-			const timestamp = new Date().getTime(); // current time
-			const exp = timestamp + (60 * 60 * 23 * 1000)
+			// const timestamp = new Date().getTime(); // current time
+			// const exp = timestamp + (60 * 60 * 23 * 1000)
 
 			jwt.set({
-				"jwt" : data.token,
-				"expired" : exp
+				jwt: data.token
 			});
 
 			goto('/history');

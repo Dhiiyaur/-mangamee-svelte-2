@@ -6,8 +6,8 @@
 	import MangaCard from '../../components/Card.svelte';
 
 	let userData;
-	
-	const fetchUserHistory = async (jwt) => {
+
+	const checkUserTokenAndFetch = async (jwt) => {
 		try {
 			const response = await fetch(apiUserGetHistory, {
 				method: 'GET',
@@ -16,7 +16,13 @@
 					Authorization: jwt['jwt']
 				}
 			});
-			userData = await response.json();
+
+			if (response.status !== 200) {
+				localStorage.removeItem('jwt');
+				window.location.href = '/user/login';
+			} else {
+				userData = await response.json();
+			}
 		} catch (error) {
 			console.log(error);
 		}
@@ -31,13 +37,7 @@
 		if ($jwt == 'null' || $jwt == undefined) {
 			goto('/user/login');
 		} else {
-			const timestamp = new Date().getTime();
-			if (timestamp > $jwt['expired']) {
-				localStorage.removeItem('jwt');
-				window.location.href = '/user/login';
-			} else {
-				fetchUserHistory($jwt);
-			}
+			checkUserTokenAndFetch($jwt);
 		}
 	});
 </script>
@@ -65,10 +65,9 @@
 
 			<div class="flex justify-center">
 				<div class="grid grid-cols-3 sm:grid-cols-6 sm:gap-y-4 sm:gap-x-1 gap-4 py-20">
-					<MangaCard cardData={userData} historyMode={true}/>
+					<MangaCard cardData={userData} historyMode={true} />
 				</div>
 			</div>
 		{/if}
 	</div>
 </div>
-
