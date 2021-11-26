@@ -12,3 +12,4 @@ export let apiUserLogin = `${api}/user/login`
 export let apiUserGetHistory =`${api}/user/gethistory`
 export let apiUserCreateHistory = `${api}/user/createhistory`
 export let apiUserDeleteHistory = `${api}/user/deletehistory`
+export let apiUserAnalytics = `${api}/analytics/all`
