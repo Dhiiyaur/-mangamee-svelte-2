@@ -1,5 +1,5 @@
 <script context="module">
-	import 'https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.7.2/Chart.bundle.min.js';
+	import chart from 'chart.js'
 </script>
 
 <script>
@@ -14,7 +14,7 @@
 	let ctx;
 	let chartCanvas;
 
-	// chart.defaults.color = '#ffffff';
+	chart.defaults.color = '#ffffff';
 	// Chart.register(...registerables)
 
 	const prepareData = async (data) => {
@@ -23,7 +23,7 @@
 
 		for (let i in data) {
 			labels.push(data[i]['api_source']);
-			values.push(data[i]['count_api_source']);
+			values.push(data[i]['count_api_source'])
 		}
 		return { labels, values };
 	};
