@@ -1,12 +1,7 @@
-<script context="module">
-	import chart from 'chart.js'
-</script>
-
-<script>
+<script lang="ts">
 	import { apiUserAnalytics } from '../../components/Api';
 	// import { Chart, registerables } from 'chart.js'
-	// import { Chart } from 'chart.js';
-	// import { registerables } from 'chart.js'
+	import Chart from 'chart.js/auto/auto.js'
 	import { onMount } from 'svelte';
 	let chartData;
 	let chartValues = [];
@@ -14,7 +9,7 @@
 	let ctx;
 	let chartCanvas;
 
-	chart.defaults.color = '#ffffff';
+	Chart.defaults.color = '#ffffff';
 	// Chart.register(...registerables)
 
 	const prepareData = async (data) => {
@@ -40,7 +35,7 @@
 		}
 	};
 
-	onMount(async (promise) => {
+	onMount(async() => {
 		let res = await checkUserAnalytics();
 		let temp = await prepareData(res);
 
@@ -48,7 +43,7 @@
 		chartLabels = temp['labels'];
 
 		ctx = chartCanvas.getContext('2d');
-		var chart = new chart(ctx, {
+		var chart = new Chart(ctx, {
 			type: 'doughnut',
 			data: {
 				labels: chartLabels,
