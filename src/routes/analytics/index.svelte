@@ -1,16 +1,21 @@
+<script context="module">
+	import 'https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.7.2/Chart.bundle.min.js';
+</script>
+
 <script>
 	import { apiUserAnalytics } from '../../components/Api';
-	import { Chart, registerables } from 'chart.js'
+	// import { Chart, registerables } from 'chart.js'
+	// import { Chart } from 'chart.js';
+	// import { registerables } from 'chart.js'
 	import { onMount } from 'svelte';
 	let chartData;
-
 	let chartValues = [];
 	let chartLabels = [];
 	let ctx;
 	let chartCanvas;
 
-	Chart.defaults.color = '#ffffff';
-	Chart.register(...registerables)
+	// chart.defaults.color = '#ffffff';
+	// Chart.register(...registerables)
 
 	const prepareData = async (data) => {
 		let labels = [];
@@ -43,7 +48,7 @@
 		chartLabels = temp['labels'];
 
 		ctx = chartCanvas.getContext('2d');
-		var chart = new Chart(ctx, {
+		var chart = new chart(ctx, {
 			type: 'doughnut',
 			data: {
 				labels: chartLabels,
